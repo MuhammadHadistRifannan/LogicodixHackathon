@@ -65,6 +65,13 @@ for (const character of CHARACTERS) {
     const file = await stat(path.join(root, decodeURI(character[key]))).catch(() => null);
     if (!file?.isFile()) errors.push(`${character.id}: berkas ${key} tidak ditemukan (${character[key]})`);
   }
+  for (const [material, spec] of Object.entries(character.model?.materials ?? {})) {
+    for (const [key, value] of Object.entries(spec)) {
+      if (key === "color" || typeof value !== "string") continue;
+      const file = await stat(path.join(root, value)).catch(() => null);
+      if (!file?.isFile()) errors.push(`${character.id}: tekstur ${material}.${key} tidak ditemukan (${value})`);
+    }
+  }
   for (const key of ["mesh", "idle", "texture"]) {
     if (!character.model) break;
     if (key === "texture" && !character.model.texture) continue;

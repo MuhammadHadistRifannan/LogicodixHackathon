@@ -32,6 +32,65 @@ function applyTexture(root, map) {
   });
 }
 
+// Peta tekstur di model.materials -> properti MeshStandardMaterial.
+const MAP_SLOTS = {
+  map: "map",
+  normal: "normalMap",
+  roughness: "roughnessMap",
+  metalness: "metalnessMap",
+  ao: "aoMap",
+  alpha: "alphaMap",
+};
+
+/**
+ * Muat semua tekstur di model.materials (dedup per URL) lalu ganti tiap material
+ * FBX yang namanya cocok dengan MeshStandardMaterial PBR. Mesh tanpa material
+ * bernama "__DEFAULT" (penamaan FBXLoader). Material yang tidak terdaftar dibiarkan.
+ */
+async function loadMaterials(textureLoader, specs) {
+  const cache = new Map();
+  const texture = (url, srgb) => {
+    if (!cache.has(url)) {
+      cache.set(
+        url,
+        textureLoader.loadAsync(url).then((tex) => {
+          if (srgb) tex.colorSpace = SRGBColorSpace;
+          return tex;
+        }),
+      );
+    }
+    return cache.get(url);
+  };
+  const built = {};
+  await Promise.all(
+    Object.entries(specs).map(async ([name, spec]) => {
+      const params = {
+        side: DoubleSide,
+        roughness: spec.roughness ? 1 : (spec.roughnessValue ?? 0.8),
+        metalness: spec.metalness ? 1 : (spec.metalnessValue ?? 0),
+      };
+      if (spec.color) params.color = spec.color;
+      await Promise.all(
+        Object.entries(MAP_SLOTS).map(async ([key, slot]) => {
+          if (spec[key]) params[slot] = await texture(spec[key], key === "map");
+        }),
+      );
+      // Rambut dan hiasan berlubang: potong per piksel, tanpa sorting transparansi.
+      if (params.alphaMap) params.alphaTest = spec.alphaTest ?? 0.5;
+      built[name] = new MeshStandardMaterial(params);
+    }),
+  );
+  return built;
+}
+
+function applyMaterials(root, materials) {
+  const swap = (material) => materials[material?.name] ?? material;
+  root.traverse((node) => {
+    if (!node.isMesh) return;
+    node.material = Array.isArray(node.material) ? node.material.map(swap) : swap(node.material);
+  });
+}
+
 /**
  * Penampil 3D untuk panggung menu: satu canvas, satu scene, satu model tampil
  * pada satu waktu. Mesh dan animasi idle dimuat dari FBX terpisah (rig sama).
@@ -76,13 +135,15 @@ export class StageViewer {
   }
 
   async #loadEntry(character) {
-    const { mesh, idle, texture } = character.model;
-    const [root, idleRig, map] = await Promise.all([
+    const { mesh, idle, texture, materials } = character.model;
+    const [root, idleRig, map, built] = await Promise.all([
       this.loader.loadAsync(mesh),
       this.loader.loadAsync(idle),
       texture ? this.textureLoader.loadAsync(texture) : null,
+      materials ? loadMaterials(this.textureLoader, materials) : null,
     ]);
     if (map) applyTexture(root, map);
+    if (built) applyMaterials(root, built);
     root.rotation.y = YAW;
     root.visible = false;
     this.scene.add(root);
@@ -98,7 +159,7 @@ export class StageViewer {
       action.setLoop(LoopRepeat, Infinity);
       action.play();
     }
-    return { root, mixer, size, center };
+    return { root, mixer, size, center, framing: character.model.frame ?? {} };
   }
 
   /**
@@ -149,13 +210,24 @@ export class StageViewer {
     if (this.current) this.frame(this.current);
   }
 
-  /** Atur kamera agar seluruh badan pas di panggung, kaki di bawah. */
-  frame({ size, center }) {
+  /**
+   * Atur kamera agar model pas di panggung. Bawaan: seluruh badan memenuhi tinggi
+   * panggung, kaki di bawah. model.frame mengubahnya untuk karakter yang bukan
+   * badan penuh (mis. kepala melayang):
+   *   fill   = bagian tinggi panggung yang diisi model (0..1, bawaan 1)
+   *   anchor = posisi tengah model dari bawah panggung (0..1, bawaan 0.5)
+   */
+  frame({ size, center, framing = {} }) {
+    const fill = framing.fill ?? 1;
+    const anchor = framing.anchor ?? 0.5;
     const half = FOV * Math.PI / 360;
-    const fitHeight = (size.y * 1.1) / 2 / Math.tan(half);
-    const fitWidth = (Math.max(size.x, size.z) * 1.1) / 2 / (Math.tan(half) * this.camera.aspect);
+    const viewHeight = (size.y * 1.1) / fill;
+    const fitHeight = viewHeight / 2 / Math.tan(half);
+    const fitWidth = ((Math.max(size.x, size.z) * 1.1) / fill) / 2 / (Math.tan(half) * this.camera.aspect);
     const distance = Math.max(fitHeight, fitWidth);
-    this.camera.position.set(center.x, center.y, center.z + distance);
-    this.camera.lookAt(center);
+    // Geser titik pandang ke bawah agar tengah model tampil di ketinggian anchor.
+    const target = new Vector3(center.x, center.y - (anchor - 0.5) * viewHeight, center.z);
+    this.camera.position.set(target.x, target.y, target.z + distance);
+    this.camera.lookAt(target);
   }
 }

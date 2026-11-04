@@ -4,6 +4,10 @@
 - `assets/characters/gadjah-mada/3d/*.fbx`: sumber dan lisensi belum dicatat. Isi nama
   pembuat, URL, dan lisensi di sini sebelum di-commit.
 - `avatar.png` dan `portrait.png` di tiap folder karakter adalah render dari model di atas.
+- `assets/characters/leak/3d/*.fbx` dan `assets/characters/leak/texture/*`: model topeng Rangda
+  "Rangda" oleh Kramaa (@MiguelOrtega), https://sketchfab.com/3d-models/rangda-66c7c7748f8a4bcdb8143c0c3a844ba4,
+  lisensi CC BY 4.0. Diubah: animasi bawaan dibuang, tulang dikembalikan ke bind pose
+  (`leak_static.fbx`), dan ditambah animasi idle melayang 4 detik (`leak_idle.fbx`).
 
 ## Musik
 - `assets/musics/background/backsound-music-fix.mp3`: sumber, pembuat, dan lisensi belum dicatat.

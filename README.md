@@ -31,7 +31,7 @@ gambar dan video per karakter, serta musik latar.
 |---|---|---|---|---|---|
 | Gadjah Mada | ✅ | ✅ | ✅ | ✅ | ✅ / ✅ |
 | Nyi Roro Kidul | ✅ | ✅ | ✅ | ⬜ | ✅ / ✅ |
-| Leak | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ / ⬜ |
+| Leak | ✅ | ✅ | ⬜ | ⬜ | ⬜ / ⬜ |
 
 Kolom yang belum terisi tetap aman: menu menampilkan siluet sebagai pengganti avatar atau
 portrait, dan latar gelap bawaan bila karakter belum punya latar.
@@ -140,6 +140,8 @@ sama dengan `id`.
 | `model.mesh` | bila ada model | FBX berisi mesh yang sudah di-rig. |
 | `model.idle` | bila ada model | FBX animasi idle. **Harus satu rig dengan `mesh`** (nama tulang sama). |
 | `model.texture` | tidak | Tekstur warna untuk FBX yang tidak membawa material, misalnya hasil rig Mixamo dari OBJ. Material diganti `MeshStandardMaterial` dua sisi. |
+| `model.materials` | tidak | Tekstur PBR per nama material FBX: `{ NamaMaterial: { map, normal, roughness, metalness, ao, alpha, color } }`. Mesh tanpa material bernama `__DEFAULT`. Peta `alpha` memakai `alphaTest` (rambut, hiasan berlubang). |
+| `model.frame` | tidak | Framing kamera untuk model yang bukan badan penuh: `fill` (bagian tinggi panggung yang diisi, bawaan 1) dan `anchor` (posisi tengah model dari bawah, bawaan 0,5). Leak memakai `{ fill: 0.6, anchor: 0.62 }`. |
 
 Contoh:
 
@@ -177,6 +179,10 @@ Contoh:
 5. **Daftarkan di proyek.** Taruh FBX di `assets/characters/<id>/3d/`, lalu isi entri di
    `client/characters.js`. Tambahkan `avatar`, `background`, dan aset lain bila sudah ada.
 6. **Periksa** dengan `npm run check`, lalu jalankan `npm start`.
+
+Karakter yang bukan humanoid (misalnya Leak, kepala bertopeng yang melayang) tidak perlu Mixamo:
+skeleton bawaan model dipakai langsung, dengan `<id>_static.fbx` sebagai mesh di pose dasar dan
+`<id>_idle.fbx` berisi animasi idle pada rig yang sama.
 
 Penyebab umum auto-rig Mixamo gagal:
 
