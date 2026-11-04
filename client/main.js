@@ -2,6 +2,7 @@ import { CHARACTERS } from "./characters.js";
 import { StageViewer } from "./stage3d.js";
 import { LoopVideo } from "./loopvideo.js";
 import { BackgroundMusic } from "./music.js";
+import { UiSound } from "./sfx.js";
 
 const STORAGE_KEY = "logicodix.character";
 
@@ -179,8 +180,14 @@ function select(index) {
   refresh();
 }
 
+/** Bunyi hover hanya bila karakter yang tampil benar-benar berganti karena aksi pemain. */
+function cue(index) {
+  if (index !== shownIndex) hoverSound.play();
+}
+
 function moveSelection(step) {
   const next = (selectedIndex + step + CHARACTERS.length) % CHARACTERS.length;
+  cue(next);
   select(next);
   els.roster.children[next].focus();
 }
@@ -188,7 +195,10 @@ function moveSelection(step) {
 function bindRoster() {
   els.roster.addEventListener("click", (event) => {
     const tile = event.target.closest(".tile");
-    if (tile) select(Number(tile.dataset.index));
+    if (!tile) return;
+    // Mouse sudah berbunyi saat hover; ini untuk ketuk layar sentuh dan Enter/Spasi.
+    cue(Number(tile.dataset.index));
+    select(Number(tile.dataset.index));
   });
 
   els.roster.addEventListener("pointerover", (event) => {
@@ -196,6 +206,7 @@ function bindRoster() {
     const tile = event.target.closest(".tile");
     if (!tile) return;
     hoverIndex = Number(tile.dataset.index);
+    cue(hoverIndex);
     refresh();
   });
 
@@ -263,6 +274,11 @@ function loadMuted() {
 }
 
 const music = new BackgroundMusic("/assets/musics/background/backsound-music-fix.mp3", { muted: loadMuted() });
+// Tombol musik juga membisukan efek suara, supaya ada satu kontrol suara saja.
+const hoverSound = new UiSound("/assets/menu-assets/sounds/hover_character_selection.mp3", {
+  volume: 0.5,
+  muted: music.muted,
+});
 
 function syncMusicToggle() {
   musicToggle.classList.toggle("is-muted", music.muted);
@@ -273,6 +289,7 @@ function syncMusicToggle() {
 music.onChange = syncMusicToggle;
 musicToggle.addEventListener("click", () => {
   music.setMuted(!music.muted);
+  hoverSound.setMuted(music.muted);
   try {
     localStorage.setItem(MUTE_KEY, music.muted ? "1" : "0");
   } catch {

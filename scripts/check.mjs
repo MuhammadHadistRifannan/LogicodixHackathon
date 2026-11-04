@@ -15,6 +15,8 @@ const required = [
   "client/characters.js",
   "client/music.js",
   "assets/musics/background/backsound-music-fix.mp3",
+  "assets/menu-assets/sounds/hover_character_selection.mp3",
+  "client/sfx.js",
   "server/index.js",
   "electron/main.js",
   "scripts/start.mjs",

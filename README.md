@@ -97,6 +97,7 @@ npm start        # server lokal + jendela Electron
 | Identitas | `.identity` | Nama, epithet, dan lore karakter, rata kanan. |
 | Roster | `#roster` | Tile avatar. Pilih dengan klik atau ketuk, pratinjau dengan hover mouse, pindah dengan tombol panah. Pilihan terakhir disimpan di `localStorage` (`logicodix.character`). |
 | Musik | `#musicToggle` | Menyalakan atau mematikan musik latar (`client/music.js`). Musik mulai pada interaksi pertama karena browser memblokir suara otomatis. |
+| Efek suara | `client/sfx.js` | Bunyi hover saat karakter yang tampil berganti karena aksi pemain: hover mouse ke tile lain, ketuk atau Enter pada tile lain, dan tombol panah. Ikut dibisukan oleh `#musicToggle`. |
 
 Perilaku cadangan:
 
@@ -114,10 +115,12 @@ Perilaku cadangan:
 | `client/stage3d.js` | `StageViewer`: scene Three.js, pemuatan FBX, animasi idle, tekstur, framing kamera. |
 | `client/loopvideo.js` | Video latar berulang tanpa lompatan. |
 | `client/music.js` | Musik latar dengan fade masuk dan keluar (Web Audio). |
+| `client/sfx.js` | `UiSound`: efek suara antarmuka pendek (Web Audio, didekode sekali, dibatasi agar tidak menumpuk). |
 | `server/` | Server statis dan `/healthz`. |
 | `assets/characters/<id>/` | Model, tekstur, avatar, dan portrait per karakter. Lihat [README aset](assets/characters/README.md). |
 | `assets/background-characters/<id>/` | Gambar dan video latar per karakter. |
 | `assets/musics/background/` | Musik latar menu. |
+| `assets/menu-assets/sounds/` | Efek suara menu (`hover_character_selection.mp3`). |
 | `assets/vendor/` | Three.js, FBXLoader, dan dependensinya (`addons/`). |
 | `electron/` | Cangkang desktop. |
 | `android/` | Proyek Android (Capacitor). |
