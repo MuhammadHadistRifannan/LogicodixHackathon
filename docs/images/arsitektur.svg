@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" width="960" height="470" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <title>Arsitektur Logicodix</title>
+  <rect width="960" height="470" fill="#0a0c0f"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#aab1bc"/>
+    </marker>
+  </defs>
+  <text x="32" y="40" fill="#f3f4f6" font-size="20" font-weight="700">Arsitektur</text>
+  <text x="32" y="64" fill="#aab1bc" font-size="13">Satu kode web di client/ dipakai di browser, desktop (Electron), dan Android (Capacitor).</text>
+
+  <!-- Client box -->
+  <rect x="32" y="88" width="560" height="212" fill="#0d1014" stroke="#e5322d" stroke-width="2"/>
+  <text x="48" y="114" fill="#e5322d" font-size="12" font-weight="700" letter-spacing="1">CLIENT · index.html + styles.css + client/</text>
+
+  <rect x="48" y="130" width="160" height="70" fill="#0a0c0f" stroke="#2b323b"/>
+  <text x="60" y="156" fill="#f3f4f6" font-size="14" font-weight="700">main.js</text>
+  <text x="60" y="176" fill="#aab1bc" font-size="12">Menu pilih karakter,</text>
+  <text x="60" y="191" fill="#aab1bc" font-size="12">roster, input</text>
+
+  <rect x="224" y="130" width="160" height="70" fill="#0a0c0f" stroke="#2b323b"/>
+  <text x="236" y="156" fill="#f3f4f6" font-size="14" font-weight="700">characters.js</text>
+  <text x="236" y="176" fill="#aab1bc" font-size="12">Data karakter dan</text>
+  <text x="236" y="191" fill="#aab1bc" font-size="12">path aset</text>
+
+  <rect x="400" y="130" width="176" height="70" fill="#0a0c0f" stroke="#2b323b"/>
+  <text x="412" y="156" fill="#f3f4f6" font-size="14" font-weight="700">stage3d.js</text>
+  <text x="412" y="176" fill="#aab1bc" font-size="12">Three.js + FBXLoader,</text>
+  <text x="412" y="191" fill="#aab1bc" font-size="12">animasi idle, tekstur</text>
+
+  <rect x="48" y="214" width="160" height="70" fill="#0a0c0f" stroke="#2b323b"/>
+  <text x="60" y="240" fill="#f3f4f6" font-size="14" font-weight="700">loopvideo.js</text>
+  <text x="60" y="260" fill="#aab1bc" font-size="12">Video latar berulang</text>
+  <text x="60" y="275" fill="#aab1bc" font-size="12">dengan cross-fade</text>
+
+  <rect x="224" y="214" width="160" height="70" fill="#0a0c0f" stroke="#2b323b"/>
+  <text x="236" y="240" fill="#f3f4f6" font-size="14" font-weight="700">music.js</text>
+  <text x="236" y="260" fill="#aab1bc" font-size="12">Musik latar, fade</text>
+  <text x="236" y="275" fill="#aab1bc" font-size="12">masuk/keluar</text>
+
+  <rect x="400" y="214" width="176" height="70" fill="#0a0c0f" stroke="#2b323b"/>
+  <text x="412" y="240" fill="#f3f4f6" font-size="14" font-weight="700">assets/</text>
+  <text x="412" y="260" fill="#aab1bc" font-size="12">Model, gambar, video,</text>
+  <text x="412" y="275" fill="#aab1bc" font-size="12">musik, vendor Three.js</text>
+
+  <!-- Server -->
+  <rect x="640" y="88" width="288" height="212" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+  <text x="656" y="114" fill="#aab1bc" font-size="12" font-weight="700" letter-spacing="1">SERVER · server/index.js</text>
+  <text x="656" y="146" fill="#f3f4f6" font-size="14" font-weight="700">Server statis Node.js</text>
+  <text x="656" y="170" fill="#aab1bc" font-size="12">Menyajikan index.html, client/,</text>
+  <text x="656" y="186" fill="#aab1bc" font-size="12">assets/ di port 8787</text>
+  <text x="656" y="218" fill="#f3f4f6" font-size="14" font-weight="700">GET /healthz</text>
+  <text x="656" y="242" fill="#aab1bc" font-size="12">Cek status dan versi; dipakai</text>
+  <text x="656" y="258" fill="#aab1bc" font-size="12">peluncur dan Render.com</text>
+
+  <line x1="636" y1="194" x2="598" y2="194" stroke="#aab1bc" stroke-width="2" marker-end="url(#a)"/>
+  <text x="600" y="184" fill="#aab1bc" font-size="11">HTTP</text>
+
+  <!-- Platforms -->
+  <rect x="32" y="340" width="280" height="102" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+  <text x="48" y="366" fill="#aab1bc" font-size="12" font-weight="700" letter-spacing="1">BROWSER</text>
+  <text x="48" y="392" fill="#f3f4f6" font-size="14" font-weight="700">npm run server</text>
+  <text x="48" y="414" fill="#aab1bc" font-size="12">Buka http://127.0.0.1:8787</text>
+
+  <rect x="340" y="340" width="280" height="102" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+  <text x="356" y="366" fill="#aab1bc" font-size="12" font-weight="700" letter-spacing="1">DESKTOP · electron/</text>
+  <text x="356" y="392" fill="#f3f4f6" font-size="14" font-weight="700">npm start · npm run phone</text>
+  <text x="356" y="414" fill="#aab1bc" font-size="12">Jendela Electron memuat client</text>
+  <text x="356" y="430" fill="#aab1bc" font-size="12">dari server lokal</text>
+
+  <rect x="648" y="340" width="280" height="102" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+  <text x="664" y="366" fill="#aab1bc" font-size="12" font-weight="700" letter-spacing="1">ANDROID · android/ (Capacitor)</text>
+  <text x="664" y="392" fill="#f3f4f6" font-size="14" font-weight="700">npm run android:sync</text>
+  <text x="664" y="414" fill="#aab1bc" font-size="12">Client disalin ke www/ lalu</text>
+  <text x="664" y="430" fill="#aab1bc" font-size="12">dibungkus jadi APK</text>
+
+  <line x1="172" y1="304" x2="172" y2="334" stroke="#aab1bc" stroke-width="2" marker-end="url(#a)"/>
+  <line x1="480" y1="304" x2="480" y2="334" stroke="#aab1bc" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M560,304 L560,320 L788,320 L788,334" fill="none" stroke="#aab1bc" stroke-width="2" marker-end="url(#a)"/>
+</svg>

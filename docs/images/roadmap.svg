@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 250" width="960" height="250" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <title>Roadmap pengembangan Logicodix</title>
+  <rect width="960" height="250" fill="#0a0c0f"/>
+  <text x="32" y="40" fill="#f3f4f6" font-size="20" font-weight="700">Alur pengembangan</text>
+  <text x="32" y="64" fill="#aab1bc" font-size="13">Dikerjakan berurutan; tiap tahap memakai hasil tahap sebelumnya.</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#aab1bc"/>
+    </marker>
+  </defs>
+
+  <!-- Tahap 1 (aktif) -->
+  <rect x="32" y="92" width="196" height="124" fill="#1a0f10" stroke="#e5322d" stroke-width="2"/>
+  <text x="48" y="118" fill="#e5322d" font-size="12" font-weight="700" letter-spacing="1">TAHAP 1 · SEKARANG</text>
+  <text x="48" y="144" fill="#f3f4f6" font-size="16" font-weight="700">Pilih karakter</text>
+  <text x="48" y="168" fill="#aab1bc" font-size="12">Roster, panggung 3D,</text>
+  <text x="48" y="184" fill="#aab1bc" font-size="12">animasi idle, latar video,</text>
+  <text x="48" y="200" fill="#aab1bc" font-size="12">musik</text>
+
+  <line x1="232" y1="154" x2="262" y2="154" stroke="#aab1bc" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Tahap 2 -->
+  <rect x="268" y="92" width="196" height="124" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+  <text x="284" y="118" fill="#aab1bc" font-size="12" font-weight="700" letter-spacing="1">TAHAP 2</text>
+  <text x="284" y="144" fill="#f3f4f6" font-size="16" font-weight="700">Loading bar</text>
+  <text x="284" y="168" fill="#aab1bc" font-size="12">Memuat map, model,</text>
+  <text x="284" y="184" fill="#aab1bc" font-size="12">dan animasi karakter</text>
+  <text x="284" y="200" fill="#aab1bc" font-size="12">terpilih</text>
+
+  <line x1="468" y1="154" x2="498" y2="154" stroke="#aab1bc" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Tahap 3 -->
+  <rect x="504" y="92" width="196" height="124" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+  <text x="520" y="118" fill="#aab1bc" font-size="12" font-weight="700" letter-spacing="1">TAHAP 3</text>
+  <text x="520" y="144" fill="#f3f4f6" font-size="16" font-weight="700">Mekanisme map</text>
+  <text x="520" y="168" fill="#aab1bc" font-size="12">Health tower dan base,</text>
+  <text x="520" y="184" fill="#aab1bc" font-size="12">collider, mesh</text>
+  <text x="520" y="200" fill="#aab1bc" font-size="12">lingkungan</text>
+
+  <line x1="704" y1="154" x2="734" y2="154" stroke="#aab1bc" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Tahap 4 -->
+  <rect x="740" y="92" width="196" height="124" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+  <text x="756" y="118" fill="#aab1bc" font-size="12" font-weight="700" letter-spacing="1">TAHAP 4</text>
+  <text x="756" y="144" fill="#f3f4f6" font-size="16" font-weight="700">Mekanik pemain</text>
+  <text x="756" y="168" fill="#aab1bc" font-size="12">Joystick analog,</text>
+  <text x="756" y="184" fill="#aab1bc" font-size="12">1 basic attack + 3 skill</text>
+  <text x="756" y="200" fill="#aab1bc" font-size="12">per karakter</text>
+</svg>

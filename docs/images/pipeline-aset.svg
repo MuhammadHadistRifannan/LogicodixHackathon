@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <title>Alur aset karakter 3D</title>
+  <rect width="960" height="300" fill="#0a0c0f"/>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#aab1bc"/>
+    </marker>
+  </defs>
+  <text x="32" y="40" fill="#f3f4f6" font-size="20" font-weight="700">Alur aset karakter 3D</text>
+  <text x="32" y="64" fill="#aab1bc" font-size="13">Dari model mentah sampai tampil di menu pilih karakter.</text>
+
+  <g font-size="12">
+    <rect x="32" y="92" width="160" height="150" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+    <text x="46" y="118" fill="#aab1bc" font-weight="700" letter-spacing="1">1 · SUMBER</text>
+    <text x="46" y="144" fill="#f3f4f6" font-size="14" font-weight="700">Model mentah</text>
+    <text x="46" y="166" fill="#aab1bc">Buatan sendiri, base</text>
+    <text x="46" y="182" fill="#aab1bc">mesh, atau gambar</text>
+    <text x="46" y="198" fill="#aab1bc">konsep → TRELLIS /</text>
+    <text x="46" y="214" fill="#aab1bc">Hunyuan3D</text>
+
+    <line x1="196" y1="167" x2="216" y2="167" stroke="#aab1bc" stroke-width="2" marker-end="url(#a)"/>
+
+    <rect x="222" y="92" width="160" height="150" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+    <text x="236" y="118" fill="#aab1bc" font-weight="700" letter-spacing="1">2 · BLENDER</text>
+    <text x="236" y="144" fill="#f3f4f6" font-size="14" font-weight="700">Bersihkan mesh</text>
+    <text x="236" y="166" fill="#aab1bc">Pose T/A, satu mesh,</text>
+    <text x="236" y="182" fill="#aab1bc">hapus rig lama dan</text>
+    <text x="236" y="198" fill="#aab1bc">properti, &lt; 100k tris,</text>
+    <text x="236" y="214" fill="#aab1bc">export FBX/OBJ</text>
+
+    <line x1="386" y1="167" x2="406" y2="167" stroke="#aab1bc" stroke-width="2" marker-end="url(#a)"/>
+
+    <rect x="412" y="92" width="160" height="150" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+    <text x="426" y="118" fill="#aab1bc" font-weight="700" letter-spacing="1">3 · MIXAMO</text>
+    <text x="426" y="144" fill="#f3f4f6" font-size="14" font-weight="700">Auto-rig</text>
+    <text x="426" y="166" fill="#aab1bc">Pasang marker dagu,</text>
+    <text x="426" y="182" fill="#aab1bc">siku, pergelangan,</text>
+    <text x="426" y="198" fill="#aab1bc">lutut, selangkangan</text>
+
+    <line x1="576" y1="167" x2="596" y2="167" stroke="#aab1bc" stroke-width="2" marker-end="url(#a)"/>
+
+    <rect x="602" y="92" width="160" height="150" fill="#0d1014" stroke="#2b323b" stroke-width="2"/>
+    <text x="616" y="118" fill="#aab1bc" font-weight="700" letter-spacing="1">4 · DOWNLOAD</text>
+    <text x="616" y="144" fill="#f3f4f6" font-size="14" font-weight="700">Dua FBX</text>
+    <text x="616" y="166" fill="#aab1bc">&lt;id&gt;_mixamo.fbx</text>
+    <text x="616" y="182" fill="#aab1bc">(with skin)</text>
+    <text x="616" y="204" fill="#aab1bc">&lt;id&gt;_idle.fbx</text>
+    <text x="616" y="220" fill="#aab1bc">(without skin)</text>
+
+    <line x1="766" y1="167" x2="786" y2="167" stroke="#aab1bc" stroke-width="2" marker-end="url(#a)"/>
+
+    <rect x="792" y="92" width="136" height="150" fill="#1a0f10" stroke="#e5322d" stroke-width="2"/>
+    <text x="806" y="118" fill="#e5322d" font-weight="700" letter-spacing="1">5 · PROYEK</text>
+    <text x="806" y="144" fill="#f3f4f6" font-size="14" font-weight="700">Daftarkan</text>
+    <text x="806" y="166" fill="#aab1bc">assets/characters/</text>
+    <text x="806" y="182" fill="#aab1bc">&lt;id&gt;/3d/</text>
+    <text x="806" y="204" fill="#aab1bc">entri di</text>
+    <text x="806" y="220" fill="#aab1bc">characters.js</text>
+  </g>
+
+  <text x="32" y="276" fill="#aab1bc" font-size="12">Mesh dan animasi idle harus satu rig (nama tulang sama, mis. mixamorig:Hips). FBX tanpa material diberi model.texture.</text>
+</svg>

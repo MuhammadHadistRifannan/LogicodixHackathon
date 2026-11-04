@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" font-family="Segoe UI, Roboto, Helvetica, Arial, sans-serif">
+  <title>Tata letak layar pilih karakter</title>
+  <!-- Layar 16:9 -->
+  <rect width="960" height="540" fill="#0a0c0f"/>
+  <!-- Lapisan scene (latar) -->
+  <rect x="8" y="8" width="944" height="524" fill="#0d1014" stroke="#2b323b" stroke-dasharray="6 6"/>
+  <text x="944" y="526" fill="#aab1bc" font-size="12" text-anchor="end">#scene · gambar background + video latar (cross-fade)</text>
+
+  <!-- Tombol musik -->
+  <rect x="38" y="28" width="44" height="44" fill="#0a0c0f" stroke="#aab1bc"/>
+  <rect x="50" y="44" width="4" height="16" fill="#aab1bc"/>
+  <rect x="58" y="38" width="4" height="22" fill="#aab1bc"/>
+  <rect x="66" y="46" width="4" height="14" fill="#aab1bc"/>
+  <text x="92" y="55" fill="#aab1bc" font-size="12">#musicToggle</text>
+
+  <!-- Panggung 3:4 -->
+  <rect x="38" y="32" width="372" height="500" fill="none" stroke="#e5322d" stroke-width="2"/>
+  <text x="54" y="104" fill="#e5322d" font-size="12" font-weight="700" letter-spacing="1">#stageArt · PANGGUNG 3:4</text>
+  <text x="54" y="124" fill="#aab1bc" font-size="12">Canvas Three.js (StageViewer)</text>
+  <text x="54" y="140" fill="#aab1bc" font-size="12">portrait.png / siluet saat memuat</text>
+  <!-- Penanda posisi model (bukan gambar karakter) -->
+  <rect x="164" y="170" width="120" height="330" fill="#1a0f10" stroke="#2b323b"/>
+  <line x1="164" y1="170" x2="284" y2="500" stroke="#2b323b"/>
+  <line x1="284" y1="170" x2="164" y2="500" stroke="#2b323b"/>
+  <text x="224" y="340" fill="#f3f4f6" font-size="13" text-anchor="middle" font-weight="700">model 3D</text>
+  <ellipse cx="224" cy="508" rx="100" ry="10" fill="#000" opacity="0.6"/>
+
+  <!-- Identitas -->
+  <rect x="520" y="44" width="402" height="150" fill="none" stroke="#2b323b" stroke-width="2"/>
+  <text x="906" y="70" fill="#aab1bc" font-size="12" text-anchor="end">.identity · rata kanan</text>
+  <text x="906" y="112" fill="#f3f4f6" font-size="30" font-family="Georgia, serif" text-anchor="end">Nama Karakter</text>
+  <text x="906" y="140" fill="#e5322d" font-size="14" text-anchor="end" letter-spacing="1">EPITHET</text>
+  <text x="906" y="168" fill="#aab1bc" font-size="13" font-style="italic" font-family="Georgia, serif" text-anchor="end">Lore singkat karakter, satu atau dua kalimat.</text>
+
+  <!-- Roster -->
+  <rect x="380" y="380" width="260" height="120" fill="none" stroke="#2b323b" stroke-width="2"/>
+  <rect x="404" y="400" width="64" height="64" fill="#0a0c0f" stroke="#e5322d" stroke-width="3"/>
+  <rect x="478" y="400" width="64" height="64" fill="#0a0c0f" stroke="#2b323b" stroke-width="2"/>
+  <rect x="552" y="400" width="64" height="64" fill="#0a0c0f" stroke="#2b323b" stroke-width="2"/>
+  <text x="436" y="437" fill="#aab1bc" font-size="11" text-anchor="middle">avatar</text>
+  <text x="510" y="437" fill="#aab1bc" font-size="11" text-anchor="middle">avatar</text>
+  <text x="584" y="437" fill="#aab1bc" font-size="11" text-anchor="middle">avatar</text>
+  <text x="510" y="488" fill="#f3f4f6" font-size="13" text-anchor="middle" font-weight="700">PILIH KARAKTER</text>
+  <text x="652" y="420" fill="#aab1bc" font-size="12">#roster</text>
+  <text x="652" y="438" fill="#aab1bc" font-size="12">klik / hover / panah</text>
+  <text x="652" y="456" fill="#aab1bc" font-size="12">pilihan disimpan di</text>
+  <text x="652" y="474" fill="#aab1bc" font-size="12">localStorage</text>
+</svg>
