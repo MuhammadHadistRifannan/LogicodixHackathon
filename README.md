@@ -31,7 +31,7 @@ gambar dan video per karakter, serta musik latar.
 |---|---|---|---|---|---|
 | Gadjah Mada | ✅ | ✅ | ✅ | ✅ | ✅ / ✅ |
 | Nyi Roro Kidul | ✅ | ✅ | ✅ | ⬜ | ✅ / ✅ |
-| Leak | ✅ | ✅ | ⬜ | ⬜ | ⬜ / ⬜ |
+| Leak | ✅ | ✅ | ✅ | ⬜ | ✅ / ✅ |
 
 Kolom yang belum terisi tetap aman: menu menampilkan siluet sebagai pengganti avatar atau
 portrait, dan latar gelap bawaan bila karakter belum punya latar.

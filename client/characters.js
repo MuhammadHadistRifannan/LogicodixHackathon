@@ -24,7 +24,7 @@ export const CHARACTERS = Object.freeze([
     lore: "Panglima Majapahit yang bersumpah tidak akan menikmati palapa sebelum seluruh Nusantara bersatu di bawah satu panji.",
     avatar: `${dir("gadjah-mada")}/avatar.png`,
     portrait: `${dir("gadjah-mada")}/portrait.png`,
-    background: encodeURI(`${bgDir("gadjah-mada")}/Pelataran Candi Majapahit Saat Senja.webp`),
+    background: `${bgDir("gadjah-mada")}/pelataran.webp`,
     backgroundVideo: `${bgDir("gadjah-mada")}/pelataran.webm`,
     model: {
       mesh: `${dir("gadjah-mada")}/3d/original-pose.fbx`,
@@ -36,10 +36,10 @@ export const CHARACTERS = Object.freeze([
     name: "Leak",
     epithet: "Penyihir Bayangan dari Bali",
     lore: "Sosok bayangan dalam cerita rakyat Bali. Ia menguasai ilmu hitam, bergerak di malam hari, dan mengubah wujud sesuka hati.",
-    avatar: null,
+    avatar: `${dir("leak")}/avatar.jpg`,
     portrait: null,
-    background: null,
-    backgroundVideo: null,
+    background: `${bgDir("leak")}/pelataran.webp`,
+    backgroundVideo: `${bgDir("leak")}/pelataran.webm`,
     model: {
       mesh: `${dir("leak")}/3d/leak_static.fbx`,
       idle: `${dir("leak")}/3d/leak_idle.fbx`,
