@@ -1,8 +1,8 @@
 // Service worker minimal: membuat game bisa dipasang (PWA) dan memuat cepat.
 // Jaringan lebih dulu untuk kode game (agar selalu terbaru); cache dipakai saat offline
 // dan untuk aset besar yang jarang berubah (three.js, ikon).
-const CACHE = "logicodix-v2";
-const SHELL = ["/", "/index.html", "/styles.css", "/ui2.css", "/manifest.webmanifest", "/assets/favicon.svg", "/assets/icon-192.png"];
+const CACHE = "logicodix-v3";
+const SHELL = ["/", "/index.html", "/styles.css", "/client/main.js", "/client/characters.js", "/manifest.webmanifest", "/assets/favicon.svg", "/assets/icon-192.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(SHELL)).catch(() => {}));

@@ -2,36 +2,20 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { validateQuestionBank } from "../shared/questions.js";
-import { HEROES } from "../shared/heroes.js";
-import { HERO_ORDER } from "../shared/constants.js";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const errors = [];
-const targets = ["client", "server", "shared", "electron", "scripts", "test"];
+const targets = ["client", "server", "electron", "scripts"];
 const required = [
   "index.html",
   "styles.css",
   "manifest.webmanifest",
   "package.json",
   "client/main.js",
-  "client/net.js",
-  "client/render.js",
-  "client/input.js",
-  "client/audio.js",
-  "client/minions.js",
-  "client/lobbyfx.js",
-  "client/combat.js",
-  "client/fx.js",
+  "client/characters.js",
+  "client/music.js",
+  "assets/musics/background/backsound-music-fix.mp3",
   "server/index.js",
-  "server/room.js",
-  "server/bot.js",
-  "shared/constants.js",
-  "shared/fx.js",
-  "shared/heroes.js",
-  "shared/minions.js",
-  "shared/physics.js",
-  "shared/questions.js",
   "electron/main.js",
   "scripts/start.mjs",
 ];
@@ -52,53 +36,50 @@ async function collect(directory) {
   return files;
 }
 
-for (const target of targets) {
-  const info = await stat(path.join(root, target)).catch(() => null);
-  if (!info?.isDirectory()) {
-    errors.push(`Folder wajib tidak ditemukan: ${target}/`);
-  }
-}
-
 for (const file of required) {
   const info = await stat(path.join(root, file)).catch(() => null);
   if (!info?.isFile()) errors.push(`File wajib tidak ditemukan: ${file}`);
 }
 
 let checked = 0;
-const files = new Set();
 for (const target of targets) {
-  for (const file of await collect(path.join(root, target))) files.add(file);
-}
-for (const file of files) {
-  const result = spawnSync(process.execPath, ["--check", file], {
-    cwd: root,
-    encoding: "utf8",
-  });
-  checked += 1;
-  if (result.status !== 0) {
-    errors.push(`Sintaks gagal: ${path.relative(root, file)}\n${result.stderr.trim()}`);
+  for (const file of await collect(path.join(root, target))) {
+    const result = spawnSync(process.execPath, ["--check", file], { cwd: root, encoding: "utf8" });
+    checked += 1;
+    if (result.status !== 0) {
+      errors.push(`Sintaks gagal: ${path.relative(root, file)}\n${result.stderr.trim()}`);
+    }
   }
 }
 
-const questionErrors = validateQuestionBank();
-errors.push(...questionErrors);
-
-const heroIds = Object.keys(HEROES);
-if (HERO_ORDER.length !== 6) errors.push("MVP harus memiliki 6 hero.");
-for (const heroId of HERO_ORDER) {
-  if (!HEROES[heroId]) errors.push(`Hero tidak ditemukan: ${heroId}`);
+// Setiap karakter harus punya folder aset, dan gambar yang dirujuk harus ada.
+const { CHARACTERS } = await import(path.join(root, "client", "characters.js"));
+const ids = new Set();
+for (const character of CHARACTERS) {
+  if (ids.has(character.id)) errors.push(`ID karakter ganda: ${character.id}`);
+  ids.add(character.id);
+  const folder = await stat(path.join(root, "assets", "characters", character.id)).catch(() => null);
+  if (!folder?.isDirectory()) errors.push(`Folder aset tidak ada: assets/characters/${character.id}/`);
+  for (const key of ["avatar", "portrait", "background", "backgroundVideo"]) {
+    if (!character[key]) continue;
+    const file = await stat(path.join(root, decodeURI(character[key]))).catch(() => null);
+    if (!file?.isFile()) errors.push(`${character.id}: berkas ${key} tidak ditemukan (${character[key]})`);
+  }
+  for (const key of ["mesh", "idle"]) {
+    if (!character.model) break;
+    const file = await stat(path.join(root, character.model[key] ?? "")).catch(() => null);
+    if (!file?.isFile()) errors.push(`${character.id}: model.${key} tidak ditemukan (${character.model[key]})`);
+  }
 }
-if (heroIds.length !== HERO_ORDER.length) errors.push("Daftar hero tidak konsisten.");
 
 const html = await readFile(path.join(root, "index.html"), "utf8");
 if (!html.includes("/client/main.js")) errors.push("index.html tidak memuat client/main.js.");
-if (!html.includes('id="gameCanvas"')) errors.push("index.html tidak memiliki canvas arena.");
 
 const manifest = JSON.parse(await readFile(path.join(root, "manifest.webmanifest"), "utf8"));
-if (!["standalone", "fullscreen"].includes(manifest.display)) errors.push("Manifest harus memakai display standalone atau fullscreen.");
-if (manifest.orientation !== "landscape") errors.push("Manifest harus mengunci orientasi landscape.");
 for (const size of ["192x192", "512x512"]) {
-  if (!manifest.icons?.some((icon) => icon.sizes === size && icon.type === "image/png")) errors.push(`Manifest butuh ikon PNG ${size}.`);
+  if (!manifest.icons?.some((icon) => icon.sizes === size && icon.type === "image/png")) {
+    errors.push(`Manifest butuh ikon PNG ${size}.`);
+  }
 }
 
 if (errors.length > 0) {
@@ -106,5 +87,5 @@ if (errors.length > 0) {
   for (const error of errors) console.error(` - ${error}`);
   process.exitCode = 1;
 } else {
-  console.log(`Pemeriksaan lulus: ${checked} file JS valid, bank soal valid, 6 hero tersedia.`);
+  console.log(`Pemeriksaan lulus: ${checked} file JS valid, ${CHARACTERS.length} karakter terdaftar.`);
 }

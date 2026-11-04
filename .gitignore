@@ -13,3 +13,4 @@ android/app/build/
 android/local.properties
 android/capture/
 *.apk
+bin/
