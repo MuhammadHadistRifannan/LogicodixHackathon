@@ -43,7 +43,7 @@ export const CHARACTERS = Object.freeze([
     avatar: `${dir("nyi-roro-kidul")}/avatar.png`,
     portrait: null,
     background: null,
-    backgroundVideo: null,
+    backgroundVideo: `${bgDir("nyi-roro-kidul")}/pelataran.webm`,
     model: {
       mesh: `${dir("nyi-roro-kidul")}/3d/kadita_mixamo.fbx`,
       idle: `${dir("nyi-roro-kidul")}/3d/kadita_idle.fbx`,
