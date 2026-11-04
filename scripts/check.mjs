@@ -65,8 +65,9 @@ for (const character of CHARACTERS) {
     const file = await stat(path.join(root, decodeURI(character[key]))).catch(() => null);
     if (!file?.isFile()) errors.push(`${character.id}: berkas ${key} tidak ditemukan (${character[key]})`);
   }
-  for (const key of ["mesh", "idle"]) {
+  for (const key of ["mesh", "idle", "texture"]) {
     if (!character.model) break;
+    if (key === "texture" && !character.model.texture) continue;
     const file = await stat(path.join(root, character.model[key] ?? "")).catch(() => null);
     if (!file?.isFile()) errors.push(`${character.id}: model.${key} tidak ditemukan (${character.model[key]})`);
   }

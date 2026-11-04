@@ -2,11 +2,14 @@ import {
   AnimationMixer,
   Box3,
   DirectionalLight,
+  DoubleSide,
   HemisphereLight,
   LoopRepeat,
+  MeshStandardMaterial,
   PerspectiveCamera,
   Scene,
   SRGBColorSpace,
+  TextureLoader,
   Vector3,
   WebGLRenderer,
 } from "../assets/vendor/three.module.js";
@@ -15,6 +18,19 @@ import { FBXLoader } from "../assets/vendor/addons/loaders/FBXLoader.js";
 const FOV = 24;
 const YAW = -0.38;
 const MAX_PIXEL_RATIO = 2;
+
+/**
+ * Ganti material semua mesh dengan satu material bertekstur. Dipakai untuk FBX
+ * tanpa material (mis. hasil rig Mixamo dari OBJ). DoubleSide karena potongan
+ * kain dan rambut model game sering hanya satu sisi.
+ */
+function applyTexture(root, map) {
+  map.colorSpace = SRGBColorSpace;
+  const material = new MeshStandardMaterial({ map, side: DoubleSide, roughness: 0.8, metalness: 0 });
+  root.traverse((node) => {
+    if (node.isMesh) node.material = material;
+  });
+}
 
 /**
  * Penampil 3D untuk panggung menu: satu canvas, satu scene, satu model tampil
@@ -40,6 +56,7 @@ export class StageViewer {
     this.camera = new PerspectiveCamera(FOV, 3 / 4, 1, 2000);
     this.container = container;
     this.loader = new FBXLoader();
+    this.textureLoader = new TextureLoader();
     this.entries = new Map();
     this.current = null;
     this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -59,8 +76,13 @@ export class StageViewer {
   }
 
   async #loadEntry(character) {
-    const { mesh, idle } = character.model;
-    const [root, idleRig] = await Promise.all([this.loader.loadAsync(mesh), this.loader.loadAsync(idle)]);
+    const { mesh, idle, texture } = character.model;
+    const [root, idleRig, map] = await Promise.all([
+      this.loader.loadAsync(mesh),
+      this.loader.loadAsync(idle),
+      texture ? this.textureLoader.loadAsync(texture) : null,
+    ]);
+    if (map) applyTexture(root, map);
     root.rotation.y = YAW;
     root.visible = false;
     this.scene.add(root);

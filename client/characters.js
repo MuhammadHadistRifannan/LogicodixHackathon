@@ -1,6 +1,7 @@
 // Daftar karakter yang bisa dipilih. Folder aset: assets/characters/<id>/.
 // avatar = foto kotak di menu pilih, portrait = gambar besar di panggung (juga
 // placeholder selagi model 3D dimuat). model = mesh FBX + FBX animasi idle (rig sama).
+// model.texture (opsional) = tekstur warna untuk mesh yang FBX-nya tidak membawa material.
 // background = gambar latar layar pilih (assets/background-characters/<id>/); null memakai latar bawaan.
 // backgroundVideo = video latar (diulang dengan cross-fade); gambar background jadi placeholder dan
 // cadangan bila video tidak didukung atau reduced motion aktif.
@@ -43,6 +44,11 @@ export const CHARACTERS = Object.freeze([
     portrait: null,
     background: null,
     backgroundVideo: null,
-    model: null,
+    model: {
+      mesh: `${dir("nyi-roro-kidul")}/3d/kadita_mixamo.fbx`,
+      idle: `${dir("nyi-roro-kidul")}/3d/kadita_idle.fbx`,
+      // FBX hasil Mixamo ini tidak membawa material, jadi tekstur dipasang manual.
+      texture: `${dir("nyi-roro-kidul")}/texture/kadita_high.png`,
+    },
   },
 ]);
