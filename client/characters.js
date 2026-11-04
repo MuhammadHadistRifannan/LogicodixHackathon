@@ -40,7 +40,7 @@ export const CHARACTERS = Object.freeze([
     name: "Nyi Roro Kidul",
     epithet: "Ratu Laut Selatan",
     lore: "Ratu gaib yang bersemayam di Laut Selatan dalam kisah Jawa, penguasa ombak dan pantai selatan.",
-    avatar: null,
+    avatar: `${dir("nyi-roro-kidul")}/avatar.png`,
     portrait: null,
     background: null,
     backgroundVideo: null,
