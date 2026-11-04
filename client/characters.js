@@ -42,7 +42,7 @@ export const CHARACTERS = Object.freeze([
     lore: "Ratu gaib yang bersemayam di Laut Selatan dalam kisah Jawa, penguasa ombak dan pantai selatan.",
     avatar: `${dir("nyi-roro-kidul")}/avatar.png`,
     portrait: null,
-    background: null,
+    background: `${bgDir("nyi-roro-kidul")}/pelataran.webp`,
     backgroundVideo: `${bgDir("nyi-roro-kidul")}/pelataran.webm`,
     model: {
       mesh: `${dir("nyi-roro-kidul")}/3d/kadita_mixamo.fbx`,
